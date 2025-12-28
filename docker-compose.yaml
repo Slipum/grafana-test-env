@@ -13,24 +13,10 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
 
-  node-exporter:
-    image: prom/node-exporter:latest
-    ports:
-      - '9100:9100'
-    pid: "host"
-    volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
-    command:
-      - '--path.procfs=/host/proc'
-      - '--path.sysfs=/host/sys'
-      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($|/)'
-  
   backend:
     build: ./backend
     ports:
-      - "8080:8080"
+      - '8080:8080'
 
 volumes:
   grafana-data:
